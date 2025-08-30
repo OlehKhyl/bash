@@ -1,0 +1,34 @@
+#This small practice exercise for ETL automation with bash from IBM Data Engineering course
+#It was completed in an Skill Network Labs environment 
+#The Dataset is avaible by link https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0250EN-SkillsNetwork/labs/Bash%20Scripting/ETL%20using%20shell%20scripting/web-server-access-log.txt.gz
+#SAMPLE OF DATA
+
+"timestamp#latitude#longitude#visitorid#accessed_from_mobile#browser_code
+2021-02-07 13:55:01#-16.23949# -132.90744#EDB35D96-3B72-7765-BD21-E955A87675B2#Yes#3
+2020-07-16 15:36:41#-34.19226# -154.14365#7AEBC97C-7BD4-BA94-837A-8CDB3E880226#Yes#10"
+
+#The task was to create BASH script that download datafile and load timestamp, latitude, longitude and visitorid to postgresql table
+
+#connect to PostgreSQL
+export PGPASSWORD=W3VbOqLARBFtOx7hUEyhRaxX; psql --host 172.21.39.201 -p 5432 -U postgres
+
+#connect to database
+\c template1
+
+#create new table with given structure in task 
+create table access_log(timestamp timestamp, latitude float, longitude float, visitorid char(37));
+
+#Create a file for bash script
+touch cp-access-log.sh
+
+#And make it executable
+chmod u+x cp-access-log.sh
+
+#check wich bash is used
+which bash
+
+#Open to edit in nano
+nano cp-access-log.sh
+
+#when ready to execute script type
+./cp-access-log.sh 
