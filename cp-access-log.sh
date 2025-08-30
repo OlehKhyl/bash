@@ -11,6 +11,8 @@ cut -d"#" -f1-4 web-server-access-log.txt | tr "#" "," > access_log.csv
 
 export PGPASSWORD=W3VbOqLARBFtOx7hUEyhRaxX;
 
+#load to postgresql table
 echo "\c template1; \COPY access_log FROM '/home/project/access_log.csv' DELIMITERS ',' CSV HEADER;" | psql --host 172.21.39.201 -p 5432 -U postgres
 
+#and select the result
 echo "select * from access_log" | psql --host 172.21.39.201 -p 5432 -U postgres template1
